@@ -1,1 +1,1 @@
-![Image](https://github.com/ravitej-kallepalli/AmazonMockup/blob/master/test.png) { width: 200px; }
+![Image](https://github.com/ravitej-kallepalli/AmazonMockup/blob/master/test.png) {:height="50%" width="50%"}
