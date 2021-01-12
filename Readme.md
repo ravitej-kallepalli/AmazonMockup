@@ -1,1 +1,1 @@
-![Image](https://github.com/ravitej-kallepalli/AmazonMockup/blob/master/test.png) {:height="50%" width="50%"}
+<img align="right" src="https://github.com/ravitej-kallepalli/AmazonMockup/blob/master/test.png" width="200">
