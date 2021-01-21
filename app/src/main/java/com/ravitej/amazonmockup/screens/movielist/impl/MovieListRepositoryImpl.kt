@@ -31,13 +31,24 @@ class MovieListRepositoryImpl : MovieListRepository {
         handler.postDelayed({
             val movies: MutableList<Movie> = mutableListOf()
 
-            (0..5).forEach {
+            (0..10).forEach {
                 movies.add(Movie("Movie #$it", "201$it"))
             }
 
-            val list = MoviesByCategory("Horror", movies)
+            val horrorList = MoviesByCategory("Horror", movies)
+            val comedyList = MoviesByCategory("Comedy", movies)
+            val romance = MoviesByCategory("Romance", movies)
+            val action = MoviesByCategory("Action", movies)
+            val amazon = MoviesByCategory("Amazon Originals", movies)
 
-            moviesLiveData.postValue(arrayListOf(list))
+            val list = arrayListOf(horrorList, comedyList, romance, action, amazon)
+            val categoryList: MutableList<MoviesByCategory> = mutableListOf()
+
+            (0 until list.size).forEach {
+                categoryList.add(list[it])
+                moviesLiveData.postValue(categoryList)
+                Thread.sleep(1000)
+            }
         }, 1000)
     }
 }

@@ -8,8 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ravitej.amazonmockup.R
 import com.ravitej.amazonmockup.databinding.FragmentMovieListBinding
+import com.ravitej.amazonmockup.screens.movielist.adapter.MovieListCategoryAdapter
 import com.ravitej.amazonmockup.screens.movielist.impl.MovieListViewModelImpl
 
 /**
@@ -19,6 +21,7 @@ class MovieListFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var viewModel: MovieListViewModel
+    private lateinit var moviesCategoryAdapter: MovieListCategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +39,10 @@ class MovieListFragment : Fragment() {
             MovieListViewModelFactory()
         ).get(MovieListViewModelImpl::class.java)
 
+        moviesCategoryAdapter = MovieListCategoryAdapter()
+        binding.moviesByCategoryRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.moviesByCategoryRv.adapter = moviesCategoryAdapter
+
         observerViewModel()
     }
 
@@ -43,7 +50,7 @@ class MovieListFragment : Fragment() {
     private fun observerViewModel() {
         viewModel.getMoviesByCategories()
             .observe(this, Observer { moviesList ->
-                binding.helloWorld.text = moviesList.toString()
+                moviesCategoryAdapter.submitList(moviesList)
             })
     }
 
