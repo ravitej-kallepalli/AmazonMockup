@@ -1,2 +1,3 @@
+include ':dsm'
 include ':app'
 rootProject.name = "AmazonMockup"

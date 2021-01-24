@@ -4,12 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.ravitej.amazonmockup.R
 import com.ravitej.amazonmockup.databinding.LayoutMovieItemBinding
 import com.ravitej.amazonmockup.model.Movie
+import com.ravitej.amazonmockup.network.IMAGE_URL
 
-class MovieListAdapter(private val list: List<Movie> = arrayListOf()) :
-    RecyclerView.Adapter<MovieListViewHolder>() {
+class MovieListAdapter(
+    private val list: List<Movie> = arrayListOf()
+) : RecyclerView.Adapter<MovieListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
         val binding: LayoutMovieItemBinding = DataBindingUtil.inflate(
@@ -37,7 +40,14 @@ class MovieListViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Movie) {
-        binding.movieReleaseDate.text = item.releasedDate
-        binding.movieTitle.text = item.name
+
+        binding.movieReleaseDate.text = item.releaseDate
+        binding.movieTitle.text = item.title
+
+        Glide
+            .with(binding.root.context)
+            .load(IMAGE_URL + item.posterPath)
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .into(binding.movieImageView);
     }
 }
